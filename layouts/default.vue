@@ -60,17 +60,17 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Регистрация заявки',
           to: '/'
         },
         {
           icon: 'mdi-clipboard-outline',
-          title: 'Шаблоны',
+          title: 'Проверка заявки',
           to: '/templates'
         },
         {
           icon: 'mdi-format-list-bulleted-square',
-          title: 'Список',
+          title: 'Список заявок',
           to: '/list'
         }
       ],

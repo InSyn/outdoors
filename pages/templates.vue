@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex class="text-center">
       <blockquote class="blockquote">
-        Шаблоны ограничения
+        Проверка зарегистрированной заявки
       </blockquote>
     </v-flex>
   </v-layout>

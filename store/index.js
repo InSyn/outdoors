@@ -1,7 +1,7 @@
 export const state = () => ({
   admin: {
-    login: 'ministr-1',
-    password: 'sh032167m1'
+    login: 'login',
+    password: 'multipasport'
   },
   page_title: 'Контоль движения потоков населения',
   userName: '',

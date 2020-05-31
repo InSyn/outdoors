@@ -1,13 +1,13 @@
 const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
   /*
    ** Headers of the page
    */
   head: {
     titleTemplate: '%s',
-    title: 'Лучше дома! Но...',
+    title: 'Timing Web multipasport application',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
