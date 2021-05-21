@@ -11,7 +11,7 @@ export const state = () => ({
     { text: 'Пол', value: 'sex', width: 'auto' },
     { text: 'Участие', value: 'will_participate', width: 'auto' },
     // { text: 'Причина', value: 'reason', width: 'auto' }
-    { text: '', value: 'data-table-expand' }
+    { text: '', value: 'data-table-expand', groupable: false }
   ]
 })
 

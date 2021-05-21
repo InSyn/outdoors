@@ -13,9 +13,10 @@
     </v-card-title>
     <v-data-table
       v-model="selected"
+      show-group-by
       :headers="users_headers"
       :items="users_list"
-      item-key="currenttime"
+      item-key="phone_number"
       :single-select="singleSelect"
       :search="search"
       :loading="loading"
@@ -29,6 +30,14 @@
         nextIcon: 'mdi-chevron-right'
       }"
     >
+      <template v-slot:item.will_participate="{ item }">
+        <div>
+          <v-icon v-if="item.will_participate.length < 3" color="green"
+            >mdi-check</v-icon
+          ><v-icon v-else color="red">mdi-close</v-icon>
+          {{ item.will_participate }}
+        </div>
+      </template>
     </v-data-table>
   </div>
 </template>
