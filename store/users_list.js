@@ -2,19 +2,14 @@ export const state = () => ({
   users_list: [],
   loadingState: false,
   users_headers: [
-    {
-      text: 'ID',
-      align: 'start',
-      value: 'chat_id'
-    },
-    { text: 'Дата', value: 'currentdate', width: 'auto' },
-    { text: 'Время', value: 'currenttime', width: 'auto' },
-    { text: 'ФИО', value: 'name', width: 'auto' },
+    { text: 'Возраст', value: 'age', width: 'auto' },
+    { text: 'Партия', value: 'candidate', width: 'auto' },
+    { text: 'Место жительства', value: 'living_place', width: 'auto' },
     // { text: 'Дата рождения', value: 'birthday', width: 'auto' },
-    // { text: 'Вр. н.', value: 'date1', width: 'auto' },
-    // { text: 'Вр. к.', value: 'date2', width: 'auto' },
-    { text: 'Адр. отправки', value: 'address', width: 'auto' },
-    { text: 'Адр. назначения', value: 'destination', width: 'auto' },
+    { text: 'Мессенджер', value: 'messenger', width: 'auto' },
+    { text: 'Телефон', value: 'phone_number', width: 'auto' },
+    { text: 'Пол', value: 'sex', width: 'auto' },
+    { text: 'Участие', value: 'will_participate', width: 'auto' },
     // { text: 'Причина', value: 'reason', width: 'auto' }
     { text: '', value: 'data-table-expand' }
   ]
@@ -34,7 +29,13 @@ export const getters = {
 
 export const mutations = {
   set_users(state, data) {
-    for (const user of data) state.users_list.push(user)
+    for (const user of data) {
+      user.will_participate
+        ? (user.will_participate = 'Да')
+        : (user.will_participate = 'Нет')
+      user.sex === 0 ? (user.sex = 'М') : (user.sex = 'Ж')
+      state.users_list.push(user)
+    }
   },
   push_users(state, data) {
     state.users_list = data
@@ -49,14 +50,7 @@ export const actions = {
     const interval = data[1] - data[0]
     store.commit('setLoadingState', true)
     this.$axios
-      .get(
-        'http://84.201.132.143:5000/getTickets/?token=' +
-          localStorage.getItem('token') +
-          '&start=' +
-          data[0] +
-          '&end=' +
-          data[1]
-      )
+      .get('http://v636867.hosted-by-vdsina.ru/getResults')
       .then((response) => {
         store.commit('set_users', response.data)
         store.commit('setLoadingState', false)
@@ -65,7 +59,7 @@ export const actions = {
         }
       })
       .catch((e) => {
-        console.log(e)
+        throw e
       })
   }
 }

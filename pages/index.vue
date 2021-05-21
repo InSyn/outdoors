@@ -1,26 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <v-card>
-      <v-card-title class="pa-4">Регистрация заявки на въезд</v-card-title>
-      <v-divider></v-divider>
-      <v-container class="pa-4">
-        <v-container class="d-flex">
-          <v-text-field label="Фамилия"></v-text-field>
-          <v-text-field class="ml-2" label="Имя"></v-text-field>
-          <v-text-field class="ml-2" label="Отчество"></v-text-field>
-        </v-container>
-        <v-container>
-          <v-text-field label="Дата рождения"></v-text-field>
-          <v-text-field label="Адрес по прописке"></v-text-field>
-          <v-text-field label="Адрес фактического проживания"></v-text-field
-        ></v-container>
-        <v-container class="d-flex">
-          <v-file-input label="Фото на светлом фоне"></v-file-input>
-          <v-file-input
-            class="ml-4"
-            label="Фото с паспортом на уровне лица"
-          ></v-file-input></v-container
-      ></v-container>
+      <v-card-title class="pa-4">Анкетирование населения</v-card-title>
     </v-card>
   </v-layout>
 </template>

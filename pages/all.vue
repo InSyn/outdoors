@@ -20,9 +20,6 @@
       :search="search"
       :loading="loading"
       loading-text="Загрузка..."
-      show-expand
-      :single-expand="singleExpand"
-      :expanded.sync="expanded"
       class="elevation-1"
       :footer-props="{
         showFirstLastPage: true,
@@ -32,26 +29,6 @@
         nextIcon: 'mdi-chevron-right'
       }"
     >
-      <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">
-          <div class="expanded-row_wrapper d-flex">
-            <div class="bDay_title">Дата рождения: &nbsp;</div>
-            <div class="bDay_content">{{ item.birthday }}</div>
-          </div>
-          <div class="expanded-row_wrapper d-flex">
-            <div class="date1_title">Время отправки: &nbsp;</div>
-            <div class="date1_content">{{ item.date1 }}</div>
-          </div>
-          <div class="expanded-row_wrapper d-flex">
-            <div class="date1_title">Время прибытия: &nbsp;</div>
-            <div class="date1_content">{{ item.date2 }}</div>
-          </div>
-          <div class="expanded-row_wrapper flex-column">
-            <div class="reason_title">Причина: &nbsp;</div>
-            <div class="reason_content">{{ item.reason }}</div>
-          </div>
-        </td>
-      </template>
     </v-data-table>
   </div>
 </template>
@@ -60,8 +37,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      expanded: [],
-      singleExpand: true,
       singleSelect: false,
       search: '',
       selected: []

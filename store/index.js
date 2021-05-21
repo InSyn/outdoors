@@ -1,9 +1,9 @@
 export const state = () => ({
   admin: {
-    login: 'login',
-    password: 'multipasport'
+    login: 'test',
+    password: '00000000'
   },
-  page_title: 'Контоль движения потоков населения',
+  page_title: 'Список анкет',
   userName: '',
   token: null
 })
