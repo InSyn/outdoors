@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -53,11 +54,23 @@ export default {
           icon: 'mdi-format-list-bulleted-square',
           title: 'Все анктеты',
           to: '/all'
+        },
+        {
+          icon: 'mdi-chart-bar',
+          title: 'Графики',
+          to: '/charts'
         }
       ],
       miniVariant: false,
       title: this.$store.getters.page_title
     }
+  },
+  computed: {
+    ...mapGetters({
+      users_list: 'users_list/users_list',
+      users_headers: 'users_list/users_headers',
+      loading: 'users_list/loadingState'
+    })
   },
   methods: {
     changeTheme() {

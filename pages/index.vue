@@ -30,10 +30,7 @@ export default {
     ...mapActions({
       set_page_title: 'set_page_title',
       checkToken: 'checkToken'
-    }),
-    log() {
-      console.log(this.file_1)
-    }
+    })
   }
 }
 </script>
