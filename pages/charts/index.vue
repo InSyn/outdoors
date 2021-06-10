@@ -12,21 +12,29 @@
         ></v-radio>
       </v-radio-group>
     </div>
-    <div class="d-flex" style="border: 2px solid #363640">
-      <apexchart
-        v-if="categories"
-        :key="selected_header"
-        type="bar"
-        width="600"
-        height="350"
-        :options="chartOptions"
-        :series="[
-          {
-            name: selected_header,
-            data: Object.values(counter)
-          }
-        ]"
-      ></apexchart>
+    <div
+      class="d-flex flex-column"
+      style="border: 2px solid #c2c2c6;background: #cccccd; width: 100% "
+    >
+      <div class="d-flex flex-wrap">
+        <apexchart
+          v-if="categories"
+          :key="selected_header"
+          type="bar"
+          width="600"
+          height="350"
+          :options="chartOptions"
+          :series="[
+            {
+              name: selected_header,
+              data: Object.values(counter)
+            }
+          ]"
+        ></apexchart>
+        <div class="d-flex flex-column">
+          <div v-for="head in categories" :key="head">{{ head }}</div>
+        </div>
+      </div>
     </div>
 
     <div>

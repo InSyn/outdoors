@@ -111,11 +111,12 @@ export default {
         vm.$router.push('/login')
       }
       if (
+        !vm.$store.getters['users_list/loadingState'] &&
         vm.users_list.length === 0 &&
         localStorage.getItem('token') === 'authorized'
-      )
-        console.log(vm.$store.getters['users_list/loadingState']) &&
-          vm.set_list()
+      ) {
+        vm.set_list()
+      }
     })
   }
 }
