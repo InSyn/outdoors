@@ -25,8 +25,50 @@
         }
       ]"
     ></apexchart>
-    <div v-html="categories"></div>
-    <div v-html="counter"></div>
+
+    <div>
+      <div v-html="filter"></div>
+      <div class="d-flex align-center">
+        <select
+          class="pa-1"
+          v-model="filter"
+          style="background: #363636; color: aliceblue; border-radius: 6px;outline: none"
+        >
+          <option
+            v-for="category in users_headers"
+            :key="category.text"
+            :label="category.text"
+            :value="category.value"
+          ></option>
+        </select>
+        <select
+          class="pa-1"
+          v-model="filtered"
+          style="background: #363636; color: aliceblue; border-radius: 6px;outline: none"
+        >
+          <option
+            v-for="val in users_list
+              .map((user) => {
+                return user[filter]
+              })
+              .filter((value, index, self) => self.indexOf(value) === index)"
+            :key="val"
+            :label="val"
+            :value="val"
+          ></option>
+        </select>
+      </div>
+      <div>
+        <div
+          v-for="user in users_list.filter((usr) => {
+            return usr[filter] === filtered
+          })"
+          :key="user.phone_number"
+          v-html="user"
+        ></div>
+      </div>
+      <div>{{ counter }}</div>
+    </div>
   </div>
 </template>
 
@@ -40,6 +82,8 @@ export default {
   },
   data() {
     return {
+      filter: this.users_headers ? this.users_headers[0].value : null,
+      filtered: null,
       selected_header: 'messenger',
       series: [
         {
@@ -71,7 +115,7 @@ export default {
         },
 
         xaxis: {
-          categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+          categories: [1, 2, 3],
           position: 'top',
           axisBorder: {
             show: false
@@ -125,7 +169,11 @@ export default {
       loading: 'users_list/loadingState'
     }),
     respondents() {
-      return this.$store.getters['users_list/users_list']
+      return this.filtered
+        ? this.users_list.filter((usr) => {
+            return usr[this.filter] === this.filtered
+          })
+        : this.users_list
     },
     categories() {
       return this.respondents
