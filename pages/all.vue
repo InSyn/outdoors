@@ -69,8 +69,7 @@
       </template>
       <template v-slot:item.will_participate="{ item }">
         <div>
-          <v-icon v-if="item.will_participate.length < 3" color="green"
-            >mdi-check</v-icon
+          <v-icon v-if="item.will_participate" color="green">mdi-check</v-icon
           ><v-icon v-else color="red">mdi-close</v-icon>
           {{ item.will_participate }}
         </div>
@@ -115,7 +114,8 @@ export default {
         vm.users_list.length === 0 &&
         localStorage.getItem('token') === 'authorized'
       )
-        vm.set_list()
+        console.log(vm.$store.getters['users_list/loadingState']) &&
+          vm.set_list()
     })
   }
 }

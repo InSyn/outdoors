@@ -3,35 +3,38 @@
     <div class="d-flex align-center">
       <v-radio-group v-model="selected_header" row>
         <v-radio
-          @click="changeCategories()"
           v-for="header in users_headers"
-          :label="header.text"
+          v-show="header.value !== 'phone_number'"
           :key="header.value"
+          :label="header.text"
           :value="header.value"
+          @click="changeCategories()"
         ></v-radio>
       </v-radio-group>
     </div>
-    <apexchart
-      :key="selected_header"
-      v-if="categories"
-      type="bar"
-      width="600"
-      height="350"
-      :options="chartOptions"
-      :series="[
-        {
-          name: selected_header,
-          data: Object.values(counter)
-        }
-      ]"
-    ></apexchart>
+    <div class="d-flex" style="border: 2px solid #363640">
+      <apexchart
+        v-if="categories"
+        :key="selected_header"
+        type="bar"
+        width="600"
+        height="350"
+        :options="chartOptions"
+        :series="[
+          {
+            name: selected_header,
+            data: Object.values(counter)
+          }
+        ]"
+      ></apexchart>
+    </div>
 
     <div>
       <div v-html="filter"></div>
       <div class="d-flex align-center">
         <select
-          class="pa-1"
           v-model="filter"
+          class="pa-1"
           style="background: #363636; color: aliceblue; border-radius: 6px;outline: none"
         >
           <option
@@ -42,8 +45,8 @@
           ></option>
         </select>
         <select
-          class="pa-1"
           v-model="filtered"
+          class="pa-1"
           style="background: #363636; color: aliceblue; border-radius: 6px;outline: none"
         >
           <option
