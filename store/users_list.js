@@ -129,9 +129,6 @@ export const mutations = {
     }
   },
   push_users(state, data) {
-    data.forEach((man) => {
-      console.log(man)
-    })
     state.users_list.push(...data)
   },
   setLoadingState(state, lState) {

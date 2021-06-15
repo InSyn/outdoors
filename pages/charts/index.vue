@@ -31,54 +31,37 @@
             }
           ]"
         ></apexchart>
-        <div class="d-flex flex-column">
-          <div v-for="head in categories" :key="head">{{ head }}</div>
-        </div>
       </div>
     </div>
 
     <div>
       <div v-html="filter"></div>
-      <div class="d-flex align-center">
-        <select
-          v-model="filter"
-          class="pa-1"
-          style="background: #363636; color: aliceblue; border-radius: 6px;outline: none"
-        >
-          <option
-            v-for="category in users_headers"
-            :key="category.text"
-            :label="category.text"
-            :value="category.value"
-          ></option>
-        </select>
-        <select
-          v-model="filtered"
-          class="pa-1"
-          style="background: #363636; color: aliceblue; border-radius: 6px;outline: none"
-        >
-          <option
-            v-for="val in users_list
-              .map((user) => {
-                return user[filter]
-              })
-              .filter((value, index, self) => self.indexOf(value) === index)"
-            :key="val"
-            :label="val"
-            :value="val"
-          ></option>
-        </select>
-      </div>
-      <div>
+      <div class="d-flex flex-column">
         <div
-          v-for="user in users_list.filter((usr) => {
-            return usr[filter] === filtered
-          })"
-          :key="user.phone_number"
-          v-html="user"
-        ></div>
+          v-for="category in users_headers"
+          :key="category.value"
+          class="d-flex align-center"
+        >
+          <div style="width: 8rem">{{ category.text }}</div>
+          <select
+            v-model="filtered[category.value]"
+            class="pa-1"
+            style="background: #363636; color: aliceblue; border-radius: 6px;outline: none; width: 10rem"
+          >
+            <option
+              v-for="val in users_list
+                .map((user) => {
+                  return user[category.value]
+                })
+                .filter((value, index, self) => self.indexOf(value) === index)"
+              :key="val"
+              :label="val"
+              :value="val"
+            ></option>
+          </select>
+        </div>
       </div>
-      <div>{{ counter }}</div>
+      <div @click="test('октябрь')">{{ filtered }}</div>
     </div>
   </div>
 </template>
@@ -94,8 +77,8 @@ export default {
   data() {
     return {
       filter: this.users_headers ? this.users_headers[0].value : null,
-      filtered: null,
-      selected_header: 'messenger',
+      filtered: {},
+      selected_header: null,
       series: [
         {
           name: 'Inflation',
@@ -126,7 +109,7 @@ export default {
         },
 
         xaxis: {
-          categories: [1, 2, 3],
+          categories: [],
           position: 'top',
           axisBorder: {
             show: false
@@ -180,11 +163,16 @@ export default {
       loading: 'users_list/loadingState'
     }),
     respondents() {
-      return this.filtered
-        ? this.users_list.filter((usr) => {
-            return usr[this.filter] === this.filtered
-          })
-        : this.users_list
+      return this.users_list.filter((respToFilter) => {
+        for (const key in this.filtered) {
+          if (
+            respToFilter[key] === undefined ||
+            respToFilter[key] !== this.filtered[key]
+          )
+            return false
+        }
+        return true
+      })
     },
     categories() {
       return this.respondents
@@ -202,6 +190,13 @@ export default {
     }
   },
   methods: {
+    test(word) {
+      this.$axios
+        .get(`http://ciss.ga/lev.php?word=${word}`)
+        .then((response) => {
+          console.log(response)
+        })
+    },
     changeCategories() {
       this.chartOptions = {
         xaxis: {
