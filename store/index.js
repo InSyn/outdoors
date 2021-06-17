@@ -1,4 +1,9 @@
 export const state = () => ({
+  users: [
+    ['admin', 'Adm032167'],
+    ['MZolotukhin', 'MZ21quiz24'],
+    ['EPodolyak', 'EP21quiz24']
+  ],
   admin: {
     login: 'test',
     password: '00000000'
@@ -9,8 +14,8 @@ export const state = () => ({
 })
 
 export const getters = {
-  admin(state) {
-    return [state.admin.login, state.admin.password]
+  users(state) {
+    return state.users
   },
   page_title(state) {
     return state.page_title
@@ -35,8 +40,9 @@ export const actions = {
   },
   logIn({ commit }, data) {
     if (
-      data[0] === this.getters.admin[0] &&
-      data[1] === this.getters.admin[1]
+      this.getters.users.some((check) => {
+        return check[0] === data[0] && check[1] === data[1]
+      })
     ) {
       localStorage.setItem('token', 'authorized')
       localStorage.setItem('userName', data[0])

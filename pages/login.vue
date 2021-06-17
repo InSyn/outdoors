@@ -79,8 +79,9 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         if (
-          this.login === this.$store.getters.admin[0] &&
-          this.password === this.$store.getters.admin[1]
+          this.$store.getters.users.some((check) => {
+            return this.login === check[0] && this.password === check[1]
+          })
         ) {
           this.$store.dispatch('logIn', [this.login, this.password])
           this.$store.dispatch('setUserName', this.login)

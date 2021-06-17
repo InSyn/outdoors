@@ -71,7 +71,7 @@
         <div>
           <v-icon v-if="item.will_participate" color="green">mdi-check</v-icon
           ><v-icon v-else color="red">mdi-close</v-icon>
-          {{ item.will_participate }}
+          {{ `${item.will_participate ? 'Да' : 'Нет'}` }}
         </div>
       </template>
     </v-data-table>

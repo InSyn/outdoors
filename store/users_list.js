@@ -1,96 +1,5 @@
 export const state = () => ({
-  users_list: [
-    // {
-    //   will_participate: 'Да',
-    //   candidate: 'Единая Россия',
-    //   age: '25-34',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'Telegram',
-    //   phone_number: '79130475622',
-    //   sex: 'M'
-    // },
-    // {
-    //   will_participate: 'Да',
-    //   candidate: 'ЛДПР',
-    //   age: '34-45',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'odnoklassniki',
-    //   phone_number: '79130474626',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Нет',
-    //   candidate: 'Справедливая Россия',
-    //   age: '45-60',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'Telegram',
-    //   phone_number: '79133475726',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Нет',
-    //   candidate: 'Единая Россия',
-    //   age: '25-34',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'VK',
-    //   phone_number: '79134473226',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Да',
-    //   candidate: 'Единая Россия',
-    //   age: '34-45',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'VK',
-    //   phone_number: '79133214226',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Да',
-    //   candidate: 'ЛДПР',
-    //   age: '25-34',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'Telegram',
-    //   phone_number: '79131275622',
-    //   sex: 'M'
-    // },
-    // {
-    //   will_participate: 'Да',
-    //   candidate: 'Другая',
-    //   age: '25-34',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'odnoklassniki',
-    //   phone_number: '79130478626',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Нет',
-    //   candidate: 'Справедливая Россия',
-    //   age: '25-34',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'Telegram',
-    //   phone_number: '79133446726',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Нет',
-    //   candidate: 'Справедливая Россия',
-    //   age: '34-45',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'VK',
-    //   phone_number: '79234475626',
-    //   sex: 'W'
-    // },
-    // {
-    //   will_participate: 'Да',
-    //   candidate: 'Другая',
-    //   age: '45-60',
-    //   living_place: 'Красноярск, Взлётка',
-    //   messenger: 'VK',
-    //   phone_number: '79130484226',
-    //   sex: 'W'
-    // }
-  ],
+  users_list: [],
   loadingState: false,
   users_headers: [
     { text: 'Участие', value: 'will_participate', width: 'auto' },
@@ -129,6 +38,7 @@ export const mutations = {
     }
   },
   push_users(state, data) {
+    console.log(data)
     state.users_list.push(...data)
   },
   setLoadingState(state, lState) {

@@ -31,37 +31,37 @@
             }
           ]"
         ></apexchart>
-      </div>
-    </div>
-
-    <div>
-      <div v-html="filter"></div>
-      <div class="d-flex flex-column">
-        <div
-          v-for="category in users_headers"
-          :key="category.value"
-          class="d-flex align-center"
-        >
-          <div style="width: 8rem">{{ category.text }}</div>
-          <select
-            v-model="filtered[category.value]"
-            class="pa-1"
-            style="background: #363636; color: aliceblue; border-radius: 6px;outline: none; width: 10rem"
-          >
-            <option
-              v-for="val in users_list
-                .map((user) => {
-                  return user[category.value]
-                })
-                .filter((value, index, self) => self.indexOf(value) === index)"
-              :key="val"
-              :label="val"
-              :value="val"
-            ></option>
-          </select>
+        <v-spacer></v-spacer>
+        <div class="pa-2">
+          <div class="d-flex flex-column">
+            <div
+              v-for="category in users_headers"
+              :key="category.value"
+              class="pa-1 d-flex align-center"
+            >
+              <div style="width: 8rem">{{ category.text }}</div>
+              <select
+                v-model="filtered[category.value]"
+                class="pa-1"
+                style="border: 1px solid #363636; border-radius: 2px;outline: none; width: 10rem"
+              >
+                <option
+                  v-for="val in users_list
+                    .map((user) => {
+                      return user[category.value]
+                    })
+                    .filter(
+                      (value, index, self) => self.indexOf(value) === index
+                    )"
+                  :key="val"
+                  :label="val"
+                  :value="val"
+                ></option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
-      <div @click="test('Хуёвый')">{{ filtered }}</div>
     </div>
   </div>
 </template>
@@ -144,7 +144,7 @@ export default {
           }
         },
         title: {
-          text: 'Monthly Inflation in Argentina, 2002',
+          text: 'Опрос населения 2021',
           floating: true,
           offsetY: 330,
           align: 'center',
