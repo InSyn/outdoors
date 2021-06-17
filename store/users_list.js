@@ -31,7 +31,7 @@ export const mutations = {
   set_users(state, data) {
     for (const user of data) {
       user.will_participate
-        ? (user.will_participate = 'Да')
+        ? (user.will_participate = 'Д а')
         : (user.will_participate = 'Нет')
       user.sex === 0 ? (user.sex = 'М') : (user.sex = 'Ж')
       state.users_list.push(user)
