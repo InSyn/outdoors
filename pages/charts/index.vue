@@ -61,7 +61,7 @@
           </select>
         </div>
       </div>
-      <div @click="test('октябрь')">{{ filtered }}</div>
+      <div @click="test('Хуёвый')">{{ filtered }}</div>
     </div>
   </div>
 </template>
@@ -107,7 +107,6 @@ export default {
             colors: ['#304758']
           }
         },
-
         xaxis: {
           categories: [],
           position: 'top',
