@@ -193,7 +193,7 @@ export default {
       this.$axios
         .get(`http://ciss.ga/lev.php?word=${word}`)
         .then((response) => {
-          console.log(response)
+          console.log(response.data)
         })
     },
     changeCategories() {

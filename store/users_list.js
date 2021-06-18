@@ -31,7 +31,7 @@ export const mutations = {
   set_users(state, data) {
     for (const user of data) {
       user.will_participate
-        ? (user.will_participate = 'Д а')
+        ? (user.will_participate = 'Да')
         : (user.will_participate = 'Нет')
       user.sex === 0 ? (user.sex = 'М') : (user.sex = 'Ж')
       state.users_list.push(user)
@@ -40,9 +40,9 @@ export const mutations = {
   push_users(state, data) {
     data.forEach((resp) => {
       this.$axios
-        .get(`http://ciss.ga/lev.php?word=${resp.living_place}`)
+        .get(`https://ciss.ga/lev.php?word=${resp.living_place}`)
         .then((response) => {
-          console.log(response.data)
+          console.log(JSON.parse(response.data))
         })
     })
     state.users_list.push(...data)
@@ -56,7 +56,7 @@ export const actions = {
   set_list(store, data) {
     store.commit('setLoadingState', true)
     this.$axios
-      .get(`http://votekrsk.club/getResults`)
+      .get(`https://votekrsk.club/getResults`)
       .then((response) => {
         store.commit('push_users', response.data)
         store.commit('setLoadingState', false)
