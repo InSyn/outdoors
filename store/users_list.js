@@ -38,7 +38,13 @@ export const mutations = {
     }
   },
   push_users(state, data) {
-    console.log(data)
+    data.forEach((resp) => {
+      this.$axios
+        .get(`http://ciss.ga/lev.php?word=${resp.living_place}`)
+        .then((response) => {
+          console.log(response.data)
+        })
+    })
     state.users_list.push(...data)
   },
   setLoadingState(state, lState) {
