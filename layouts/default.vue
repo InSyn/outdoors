@@ -76,6 +76,10 @@ export default {
     changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     }
+  },
+  mounted() {
+    this.$store.getters['users_list/users_list'].length === 0 &&
+      this.$store.dispatch('users_list/set_list')
   }
 }
 </script>

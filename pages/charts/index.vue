@@ -4,7 +4,11 @@
       <v-radio-group v-model="selected_header" row>
         <v-radio
           v-for="header in users_headers"
-          v-show="header.value !== 'phone_number'"
+          v-show="
+            header.value !== 'phone_number' &&
+              header.value !== 'living_place' &&
+              header.value !== 'will_participate'
+          "
           :key="header.value"
           :label="header.text"
           :value="header.value"
@@ -189,13 +193,6 @@ export default {
     }
   },
   methods: {
-    test(word) {
-      this.$axios
-        .get(`http://ciss.ga/lev.php?word=${word}`)
-        .then((response) => {
-          console.log(response.data)
-        })
-    },
     changeCategories() {
       this.chartOptions = {
         xaxis: {
@@ -231,11 +228,6 @@ export default {
       if (localStorage.getItem('token') !== 'authorized') {
         vm.$router.push('/login')
       }
-      if (
-        vm.users_list.length === 0 &&
-        localStorage.getItem('token') === 'authorized'
-      )
-        vm.$store.dispatch('users_list/set_list')
     })
   }
 }

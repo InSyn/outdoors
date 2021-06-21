@@ -75,6 +75,10 @@
         </div>
       </template>
     </v-data-table>
+    <div
+      style="border-radius: 50%; width: 2rem;height: 2rem;background-color: #3b8070"
+      @click="$store.dispatch('users_list/set_region_data')"
+    ></div>
   </div>
 </template>
 <script>
@@ -109,13 +113,6 @@ export default {
     next((vm) => {
       if (localStorage.getItem('token') !== 'authorized') {
         vm.$router.push('/login')
-      }
-      if (
-        !vm.$store.getters['users_list/loadingState'] &&
-        vm.users_list.length === 0 &&
-        localStorage.getItem('token') === 'authorized'
-      ) {
-        vm.set_list()
       }
     })
   }
