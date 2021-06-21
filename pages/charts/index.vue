@@ -17,8 +17,8 @@
       </v-radio-group>
     </div>
     <div
-      class="d-flex flex-column"
-      style="border: 2px solid #c2c2c6;background: #cccccd; width: 100% "
+      class="pa-4 d-flex flex-column"
+      style="border: 2px solid #c2c2c6;background: #8c8c8d; width: 100% "
     >
       <div class="d-flex flex-wrap">
         <apexchart
@@ -27,6 +27,7 @@
           type="bar"
           width="600"
           height="350"
+          style="background: #cccccd;"
           :options="chartOptions"
           :series="[
             {
@@ -42,6 +43,7 @@
               v-for="category in users_headers"
               :key="category.value"
               class="pa-1 d-flex align-center"
+              style="color:aliceblue;"
             >
               <div style="width: 8rem">{{ category.text }}</div>
               <select

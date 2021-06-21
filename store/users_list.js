@@ -1,6 +1,7 @@
 export const state = () => ({
   users_list: [],
   loadingState: false,
+  regionDataState: 0,
   users_headers: [
     { text: 'Участие', value: 'will_participate', width: 'auto' },
     { text: 'Партия', value: 'candidate', width: 'auto' },
@@ -26,6 +27,9 @@ export const getters = {
   },
   loadingState: (state) => {
     return state.loadingState
+  },
+  regionDataState: (state) => {
+    return state.regionDataState
   }
 }
 
@@ -48,6 +52,9 @@ export const mutations = {
   },
   setLoadingState(state, lState) {
     state.loadingState = lState
+  },
+  setRegionDataState(state, newState) {
+    if (state.regionDataState < newState) state.regionDataState = newState
   }
 }
 
@@ -79,7 +86,7 @@ export const actions = {
             this.$axios
               .get(`https://ciss.ga/lev.php?word=${resp.living_place}`)
               .then((regionData) => {
-                console.log(i * 200 + indx)
+                store.commit('setRegionDataState', i * 200 + indx)
                 regionData.data &&
                   store.commit('set_regionData', [
                     i * 200 + indx,
@@ -93,7 +100,7 @@ export const actions = {
                 throw e
               })
           })
-      }, i * 512)
+      }, i * 1024)
     }
   }
 }
