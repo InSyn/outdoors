@@ -5,7 +5,8 @@
         <v-radio
           v-for="header in users_headers"
           v-show="
-            header.value !== 'phone_number' &&
+            header.value !== 'unixtime' &&
+              header.value !== 'phone_number' &&
               header.value !== 'living_place' &&
               header.value !== 'will_participate'
           "

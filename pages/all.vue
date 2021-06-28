@@ -30,6 +30,9 @@
     </v-card-title>
     <v-data-table
       v-model="selected"
+      :expanded.sync="expanded"
+      :single-expand="singleExpand"
+      show-expand
       :group-by="group_by"
       :headers="users_headers"
       :items="users_list"
@@ -47,6 +50,11 @@
         nextIcon: 'mdi-chevron-right'
       }"
     >
+      <template v-slot:item.unixtime="{ item }">
+        <div class="d-flex align-center">
+          {{ getDate(item.unixtime) }}
+        </div>
+      </template>
       <template v-slot:item.messenger="{ item }">
         <div class="d-flex align-center">
           <v-icon
@@ -74,11 +82,38 @@
           {{ `${item.will_participate ? 'Да' : 'Нет'}` }}
         </div>
       </template>
+      <template v-slot:expanded-item="{ headers, item }">
+        <td :colspan="headers.length">
+          <div class="d-flex flex-wrap">
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Готов к звонку: ${(item.can_we_call && 'Да') || 'Нет'}` }}
+            </div>
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Почему за основную: ${item.why_candidate}` }}
+            </div>
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Вторая партия: ${item.second_candidate}` }}
+            </div>
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Точно нет: ${item.never_candidate}` }}
+            </div>
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Причина: ${item.never_candidate}` }}
+            </div>
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Соц. статус: ${item.social_status}` }}
+            </div>
+            <div class="pa-1" style="border-right: 1px solid #c2c2c6">
+              {{ `Пожелание: ${item.tip}` }}
+            </div>
+          </div>
+        </td>
+      </template>
     </v-data-table>
-    <div
-      style="border-radius: 50%; width: 2rem;height: 2rem;background-color: #3b8070"
-      @click="$store.dispatch('users_list/set_region_data')"
-    ></div>
+    <!--    <div-->
+    <!--      style="border-radius: 50%; width: 2rem;height: 2rem;background-color: #3b8070"-->
+    <!--      @click="$store.dispatch('users_list/set_region_data')"-->
+    <!--    ></div>-->
   </div>
 </template>
 <script>
@@ -89,6 +124,8 @@ export default {
       singleSelect: false,
       search: '',
       selected: [],
+      expanded: [],
+      singleExpand: true,
       group_by: null
     }
   },
@@ -102,6 +139,19 @@ export default {
   methods: {
     set_group(group) {
       this.group_by = group
+    },
+    getDate(time) {
+      const date = new Date(time * 1000)
+      return `${date.getDate()}/${(date.getMonth().toString().length < 2 &&
+        '0' + date.getMonth()) ||
+        date.getMonth()}/${date
+        .getFullYear()
+        .toString()
+        .slice(2, 4)} ${(date.getHours().toString().length < 2 &&
+        '0' + date.getHours()) ||
+        date.getHours()}:${(date.getMinutes().toString().length < 2 &&
+        '0' + date.getMinutes()) ||
+        date.getMinutes()}`
     },
     ...mapActions({
       set_list: 'users_list/set_list',
