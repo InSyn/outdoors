@@ -1,6 +1,7 @@
 export const state = () => ({
   users_list: [],
   loadingState: false,
+  regionDataState: 0,
   users_headers: [
     { text: 'Дата', value: 'unixtime', width: 'auto' },
     { text: 'Участие', value: 'will_participate', width: 'auto' },
@@ -25,6 +26,9 @@ export const getters = {
   },
   loadingState: (state) => {
     return state.loadingState
+  },
+  regionDataState: (state) => {
+    return state.regionDataState
   }
 }
 
@@ -47,6 +51,9 @@ export const mutations = {
   },
   setLoadingState(state, lState) {
     state.loadingState = lState
+  },
+  setRegionDataState(state, newState) {
+    if (state.regionDataState < newState) state.regionDataState = newState
   }
 }
 
@@ -67,5 +74,30 @@ export const actions = {
   },
   set_region_data(store, data) {
     console.log(data)
+    store.commit('setLoadingState', true)
+    for (let i = 0; i < Math.ceil(store.getters.users_list.length / 200); i++) {
+      setTimeout(() => {
+        store.getters.users_list
+          .slice(i * 200, (i + 1) * 200)
+          .forEach((resp, indx) => {
+            this.$axios
+              .get(`https://ciss.ga/lev.php?word=${resp.living_place}`)
+              .then((regionData) => {
+                store.commit('setRegionDataState', i * 200 + indx)
+                regionData.data &&
+                  store.commit('set_regionData', [
+                    i * 200 + indx,
+                    { id: regionData.data[0].id, name: regionData.data[0].name }
+                  ])
+                if (i * 200 + indx === store.getters.users_list.length - 1) {
+                  store.commit('setLoadingState', false)
+                }
+              })
+              .catch((e) => {
+                throw e
+              })
+          })
+      }, i * 1024)
+    }
   }
 }

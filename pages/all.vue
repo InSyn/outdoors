@@ -114,6 +114,27 @@
     <!--      style="border-radius: 50%; width: 2rem;height: 2rem;background-color: #3b8070"-->
     <!--      @click="$store.dispatch('users_list/set_region_data')"-->
     <!--    ></div>-->
+    <div
+      style="width: 100%;height: 3px; position: relative;border-left: 1px solid #35495e;border-top: 1px solid #35495e"
+    >
+      <div
+        style="position:absolute; height: 100%;background-color: #3b8070"
+        :style="{
+          width: `${($store.getters['users_list/regionDataState'] /
+            $store.getters['users_list/users_list'].length) *
+            100}%`
+        }"
+      ></div>
+    </div>
+    <div class="d-flex align-center">
+      <div
+        class="pa-1"
+        style="cursor: pointer;border-radius: 50%; height: 2rem;background-color: #3b8070;color: aliceblue"
+        @click="$store.dispatch('users_list/set_region_data')"
+      >
+        Load regions
+      </div>
+    </div>
   </div>
 </template>
 <script>
